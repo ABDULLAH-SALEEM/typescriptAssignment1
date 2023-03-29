@@ -26,20 +26,23 @@ function generateTable(): void {
         header.appendChild(cell);
     })
     tableBody.appendChild(header);
-    characterData.map((data:CharacterType, idx:number) => {
+    characterData.map((data: CharacterType, idx: number) => {
         const row = document.createElement("tr");
-        Object.values(data).map((td:any, idx: number) => {
+        Object.values(data).map((td: string | number, idx: number) => {
             const cell = document.createElement("td");
             if (!td) {
                 td = 'N/A'
             }
-            if (idx === 6) {
+            if (idx === 6 && typeof (td) === 'string') {
                 var img = document.createElement('img');
                 img.src = td
                 cell.appendChild(img);
             } else {
-                const cellText = document.createTextNode(td);
-                cell.appendChild(cellText);
+                if (typeof (td) === 'string') {
+                    const cellText = document.createTextNode(td);
+                    cell.appendChild(cellText);
+                }
+
             }
             row.appendChild(cell);
         })
