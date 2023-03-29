@@ -28,21 +28,19 @@ function generateTable(): void {
     tableBody.appendChild(header);
     characterData.map((data: CharacterType, idx: number) => {
         const row = document.createElement("tr");
-        Object.values(data).map((td: string | number, idx: number) => {
+        Object.values(data).map((tableData: number | string, idx: number) => {
+            tableData = tableData.toString()
             const cell = document.createElement("td");
-            if (!td) {
-                td = 'N/A'
+            if (!tableData) {
+                tableData = 'N/A'
             }
-            if (idx === 6 && typeof (td) === 'string') {
+            if (tableData.includes('https')) {
                 var img = document.createElement('img');
-                img.src = td
+                img.src = tableData
                 cell.appendChild(img);
             } else {
-                if (typeof (td) === 'string') {
-                    const cellText = document.createTextNode(td);
-                    cell.appendChild(cellText);
-                }
-
+                const cellText = document.createTextNode(tableData);
+                cell.appendChild(cellText);
             }
             row.appendChild(cell);
         })

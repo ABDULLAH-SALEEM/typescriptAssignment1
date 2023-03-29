@@ -17,18 +17,19 @@ function generateTable() {
     tableBody.appendChild(header);
     characterData.map((data, idx) => {
         const row = document.createElement("tr");
-        Object.values(data).map((td, idx) => {
+        Object.values(data).map((tableData, idx) => {
+            tableData = tableData.toString();
             const cell = document.createElement("td");
-            if (!td) {
-                td = 'N/A';
+            if (!tableData) {
+                tableData = 'N/A';
             }
-            if (idx === 6) {
+            if (tableData.includes('https')) {
                 var img = document.createElement('img');
-                img.src = td;
+                img.src = tableData;
                 cell.appendChild(img);
             }
             else {
-                const cellText = document.createTextNode(td);
+                const cellText = document.createTextNode(tableData);
                 cell.appendChild(cellText);
             }
             row.appendChild(cell);
